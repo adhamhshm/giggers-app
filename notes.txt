@@ -1,0 +1,24 @@
+> npx create-next-app@latest ./
+
+√ Would you like to use TypeScript? ... Yes
+√ Would you like to use ESLint? ... No 
+√ Would you like to use Tailwind CSS? ... Yes
+√ Would you like to use `src/` directory? ... No
+√ Would you like to use App Router? (recommended) ... Yes
+√ Would you like to customize the default import alias? ... No
+
+> npm install @headlessui/react cloudinary jsonwebtoken @types/jsonwebtoken graphql-request next-auth
+
+> npm install @grafbase/sdk --save-dev
+
+> npx grafbase init --config-format typescript
+
+  Your project was successfully set up for Grafbase!
+  Your new schema can be found at .\grafbase\grafbase.config.ts
+  We've added our SDK to your package.json, make sure to install dependencies before continuing.
+
+  documentation -> https://www.npmjs.com/package/@grafbase/sdk
+  useful view of project -> 
+
+  to ease the process, create the repository of the project to github, and
+  in grafbase, we can create the grafbase project from the github
