@@ -1,3 +1,6 @@
+ - Random Notes -
+> sometimes delete the next folder and run back the dev can help in fixing questionable error
+
 > npx create-next-app@latest ./
 
 √ Would you like to use TypeScript? ... Yes
@@ -11,14 +14,44 @@
 
 > npm install @grafbase/sdk --save-dev
 
+ - Using Grafbase -
+
 > npx grafbase init --config-format typescript
+
+  create the model inside "./grafbase/grafbase.config.ts"
 
   Your project was successfully set up for Grafbase!
   Your new schema can be found at .\grafbase\grafbase.config.ts
   We've added our SDK to your package.json, make sure to install dependencies before continuing.
 
   documentation -> https://www.npmjs.com/package/@grafbase/sdk
-  useful view of project -> 
 
-  to ease the process, create the repository of the project to github, and
-  in grafbase, we can create the grafbase project from the github
+  create the repository of the project to github link them to grafbase
+  inside the grafbase -> import repo -> deploy -> connect
+  copy the link for api key and api url to the .env file in the root directory
+
+  useful view of project -> View Pathfinder
+
+> npx grafbase@0.24 dev -> to initialize the dev environment -> remember to run this
+
+  Listening on port 4000
+  - Pathfinder: http://127.0.0.1:4000
+  - Endpoint:   http://127.0.0.1:4000/graphql
+
+  - Using NextAuth -
+
+  documentation -> https://next-auth.js.org/getting-started/example
+  view the docs to see how we can setup the NextAuth for our app
+
+  get the NEXTAUTH_SECRET -> https://www.cryptool.org/en/cto/openssl -> paste openssl rand -base64 32
+
+  - Using Cloudinary -
+
+  go to the website, copy everything you see
+
+  - About NEXT_PUBLIC prefix in the .env -
+
+  the one with NEXT_PUBLIC will be available to the client side application
+  the ones with none will only available from the server endpoint
+
+  

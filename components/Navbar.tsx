@@ -1,14 +1,17 @@
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 
 import { NavLinks } from "@/constants";
 import AuthProviders from "./AuthProviders";
+import { getCurrentUser } from "@/lib/session";
+import ProfileMenu from "./ProfileMenu";
 
 
 
-const Navbar = () => {
+const Navbar = async () => {
 
-    const session = null;
+    const session = await getCurrentUser();
+    console.log(session)
 
     return (
         <nav className="flexBetween navbar">
@@ -26,13 +29,23 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            {/* if user is logged in, user can see the profile photo and post their works, if not, user will see the sign in option */}
+            {/* the Navbar component is server side rendered, however, not 
+                all components are appropriate to be server sider rendered
+                as some should stay as client component. 
+
+                thus, we create a new component that is client side rendered
+                and import them to the server side rendered component.
+                
+                for example ProfileMenu is imported inside the Navbar*/}
+
             <div className="flexCenter gap-4">
-                {session ? (
+                {/* if user is logged in, user can see the profile photo and 
+                    post their works, if not, user will see the sign in option */}
+                {session?.user ? (
                     <>
-                        UserPhoto
+                        <ProfileMenu session={session} />
                         <Link href="/create-project">
-                            Share Work
+                            Create Work
                         </Link>
                     </>
                 ) : (
