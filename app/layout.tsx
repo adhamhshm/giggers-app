@@ -7,9 +7,6 @@ import Footer from "@/components/Footer"
 export const metadata = {
     title: "Giggers",
     description: "A Gig Worker Portal",
-    icons: {
-        icon: "web-icon.png",
-    }
 }
 
 export default function RootLayout({ children, } : { children: React.ReactNode }) {
