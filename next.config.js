@@ -16,6 +16,7 @@ const nextConfig = {
         ignoreDuringBuilds: true
     },
     typescript: {
+        // https://stackoverflow.com/questions/76240881/how-to-force-typescript-to-ignore-node-modules-in-next-13
         // !! WARN !!
         // Dangerously allow production builds to successfully complete even if
         // your project has type errors.
