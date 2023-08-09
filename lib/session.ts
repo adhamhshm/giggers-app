@@ -55,10 +55,10 @@ export const authOptions: NextAuthOptions = {
                 return session;
             }
         },
-        async signIn({ user }: { user: keyof AdapterUser | User }) {
+        async signIn({ user }: { user: AdapterUser | User }) {
             try {
                 //get the user if they are exist
-                const userExists = await getUser(user?.email! as string) as { user?: UserProfile };
+                const userExists = await getUser(user?.email!) as { user?: UserProfile };
 
                 //if the user doesn't exist, create them
                 if (!userExists.user) {
