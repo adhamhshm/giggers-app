@@ -11,13 +11,14 @@ import ProfileMenu from "./ProfileMenu";
 const Navbar = async () => {
 
     const session = await getCurrentUser();
-    console.log(session)
+    //check if there is session in the terminal
+    //console.log(session)
 
     return (
         <nav className="flexBetween navbar">
             <div className="flex-1 flexStart gap-10">
                 <Link href="/">
-                    <Image src="/logo.svg" width={115} height={43} alt="logo"/>
+                    <Image src="/logo-color.png" width={150} height={50} alt="logo"/>
                 </Link>
                 {/* iterate all of the navigation links from the constant folder */}
                 <ul className="xl:flex hidden text-small gap-7">

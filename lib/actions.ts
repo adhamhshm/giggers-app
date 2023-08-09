@@ -1,5 +1,5 @@
 import { ProjectForm } from "@/common.types";
-import { createProjectMutation, createUserMutation, getUserQuery } from "@/graphql";
+import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from "@/graphql";
 import { GraphQLClient } from "graphql-request";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -48,8 +48,8 @@ export const createUser = (name: string, email: string, avatarUrl: string) => {
 }
 
 //create an async arrow function that will upload image via cloudinary
+//it will accept an imagePath, the source of the image that will be uploaded
 export const uploadImage = async (imagePath: string) => {
-    alert("getting image");
     try {
         //make a request to our backend
         //remember to make the backend endpoint so that we can upload image to cloudinary
@@ -72,12 +72,10 @@ export const uploadImage = async (imagePath: string) => {
 //it will accept token to ensure the user actually logged in and have the privilage to create project
 export const createNewProject = async (form: ProjectForm, creatorId: string, token: string) => {
     const imageUrl = await uploadImage(form.image);
-    alert("get image done");
 
     if (imageUrl.url) {
         //allow only the user to create the project
         client.setHeader("Authorization", `Bearer ${token}`);
-        alert("authorize done");
     
         const variables = {
             input: { 
@@ -88,8 +86,80 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
                 }
             }
         }
-        alert("so far so good");
         //create the mutation inside "/graphql/index.ts"
         return makeGraphQLRequest(createProjectMutation, variables);
       }
+}
+
+//create an async arrow function to fetch all projects
+//it will accept category but it is optional
+//it will accept endCursor but it is optional, this endCursor is to know which page we are currently viewing
+export const fetchAllProjects = async (category?: string, endCursor?: string) => {
+    client.setHeader("x-api-key", apiKey);
+
+    return makeGraphQLRequest(projectsQuery, { category, endCursor });
+}
+
+//create an arrow function to get the project details
+//it will accept the id of the project
+export const getProjectDetails = (id: string) => {
+    client.setHeader("x-api-key", apiKey);
+    return makeGraphQLRequest(getProjectByIdQuery, { id });
+}
+
+//create an arrow function to get user projects / list of projects
+//it will accept the id of the project
+//it will a "last" parameter that specify how many project we want to see
+export const getUserProjects = (id: string, last?: number) => {
+    client.setHeader("x-api-key", apiKey);
+    return makeGraphQLRequest(getProjectsOfUserQuery, { id, last });
+}
+
+//create an arrow function to delete user project
+//it will accept the id of the project
+//it will accept a token as to check only the creator of the project is authorized to delete the project
+export const deleteProject = (id: string, token: string) => {
+    //allow only the user to create the project
+    client.setHeader("Authorization", `Bearer ${token}`);
+    return makeGraphQLRequest(deleteProjectMutation, { id, token });
+}
+
+
+//create an arrow function to update a project
+//it will accept the form as the one that have been created before
+//it will accept a projectId
+//it will accept a token for authorization
+export const updateProject = async (form: ProjectForm, projectId: string, token: string) => {
+    //check if the user change the image
+    //if the image url is base-64 string, then it is a new image
+    //else, this if statement will be ignored
+    function isBase64DataURL(value: string) {
+        const base64Regex = /^data:image\/[a-z]+;base64,/;
+        return base64Regex.test(value);
+    }
+    
+    //spread the previous form to the updated form
+    let updatedForm = { ...form };
+    
+    //we check if the image url is base-64
+    const isUploadingNewImage = isBase64DataURL(form.image);
+
+    if (isUploadingNewImage) {
+        const imageUrl = await uploadImage(form.image);
+    
+        //add the new image in the updated form
+        if (imageUrl.url) {
+            updatedForm = { 
+                ...form, image: imageUrl.url }; //exhange the image to the new cloudinary image
+        }
+    }
+    
+    client.setHeader("Authorization", `Bearer ${token}`);
+    
+    const variables = {
+        id: projectId,
+        input: updatedForm,
+    }
+    
+    return makeGraphQLRequest(updateProjectMutation, variables);
 }

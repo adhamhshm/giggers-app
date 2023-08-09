@@ -1,36 +1,45 @@
 "use client";
 
-import { SessionInterface } from "@/common.types";
+import { ProjectInterface, SessionInterface } from "@/common.types";
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import FormField from "./FormField";
 import { categoryFilters } from "@/constants";
 import CustomMenu from "./CustomMenu";
 import CustomButton from "./CustomButton";
-import { createNewProject, fetchToken } from "@/lib/actions";
+import { createNewProject, fetchToken, updateProject } from "@/lib/actions";
 import { useRouter } from 'next/navigation';
 
 type Props = {
     type: string,
     session: SessionInterface,
+    project?: ProjectInterface,
 }
 
 //it will accept props like type and session that we passed from the CreateProject component / create-project page
-const ProjectForm = ({ type, session } : Props) => {
+//when creating project, the project parameter will not be used, as it is for editing project
+const ProjectForm = ({ type, session, project } : Props) => {
 
     const router = useRouter();
 
     //create a state to check if the form is submitting or not
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    //create a state of a form, with an object with empty state values
+    //when creating project, fill with object with empty state values
+    //when editing project, fill with object with preset values it have
     const [form, setForm] = useState({
-        title: "",
-        description: "",
-        image: "",
-        optionalUrl: "",
-        category: "",
+        title: project?.title || "",
+        description: project?.description || "",
+        image: project?.image || "",
+        optionalUrl: project?.optionalUrl || "",
+        category: project?.category || "", 
     });
+
+    /*
+    shortcut tricks:
+    - can press alt an click the line. can edit all line at the same time
+    - can press shift and ctrl+c to copy the whole word
+    */
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         
@@ -41,13 +50,20 @@ const ProjectForm = ({ type, session } : Props) => {
         const { token } = await fetchToken();
 
         try {
+            //if the form submitted with the create purposes
             if (type === "create") {
                 //create project
-                alert("Creating new project!");
                 await createNewProject(form, session?.user?.id, token);
                 //navigate to the homepage
-                alert("Created new project!");
+                //alert("Created new project!");
                 router.push("/");
+            }
+            //if the form submitted with the edit purposes
+            if (type === "edit") {
+                //update project
+                await updateProject(form, project?.id as string, token)
+                //navigate to the homepage
+                router.push("/")
             }
         }
         catch (error) {

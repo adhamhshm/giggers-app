@@ -20,7 +20,7 @@ const CreateProject = async () => {
     return (
         <Modal>
             <h3 className="modal-head-text">
-                Create a New Project
+                Create Project
             </h3>
 
             {/* this ProjectForm is for "create", there will be one for "edit" 

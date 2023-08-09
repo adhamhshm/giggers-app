@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="flex flex-col gap-12 w-full">
                 {/* to contain logo and a short desc */}
                 <div className="flex items-start flex-col">
-                    <Image src="/logo-purple.svg" width={115} height={38} alt="logo"/>
+                    <Image src="/logo-black.png" width={115} height={38} alt="logo"/>
                     <p className="text-start text-sm font-normal mt-5 max-w-xs">
                         World leading platform for gig workers!
                     </p>

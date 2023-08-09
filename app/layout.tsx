@@ -13,7 +13,7 @@ export default function RootLayout({ children, } : { children: React.ReactNode }
     return (
         <html lang="en">
             <body>
-                {/* we can notice how the app is divided by 3 section -> Navbar, web content, and Footer */}
+                {/* we can notice how the app is divided by 3 section -> Navbar, main, and Footer */}
                 {/* the Navbar and the Footer will always be available through the whole app */}
                 {/* thus, the layout will always render them */}
                 <Navbar />
