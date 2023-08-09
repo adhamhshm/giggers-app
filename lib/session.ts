@@ -2,7 +2,7 @@
 
 import { getServerSession } from "next-auth/next";
 import { NextAuthOptions, User } from "next-auth";
-import { AdapterUser } from "../node_modules/next-auth/src/adapters"; //import { AdapterUser} from "next-auth/adapter" -> seems not to work
+import { AdapterUser } from "next-auth/adapters"; //import { AdapterUser} from "next-auth/adapters" -> seems not to work
 import GoogleProvider from "next-auth/providers/google"
 import jsonwebtoken from "jsonwebtoken";
 import { JWT } from "next-auth/jwt";
