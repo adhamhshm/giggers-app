@@ -39,7 +39,13 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
     //ProjectSearch is a type
     //it will fetch the project with the selected category if any
 
-    
+    if (category === undefined) {
+        category = "undefined";
+    }
+
+    if (endCursor === undefined) {
+        endCursor = "undefined";
+    }
 
     const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
 
