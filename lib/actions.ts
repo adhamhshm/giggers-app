@@ -97,7 +97,13 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
 export const fetchAllProjects = async (category?: string, endCursor?: string) => {
     client.setHeader("x-api-key", apiKey);
 
-    return makeGraphQLRequest(projectsQuery, { category, endCursor });
+    const variables = {
+        category: category,
+        endCursor: endCursor,
+    }
+
+    //return makeGraphQLRequest(projectsQuery, { category, endCursor });
+    return makeGraphQLRequest(projectsQuery, variables);
 }
 
 //create an arrow function to get the project details
