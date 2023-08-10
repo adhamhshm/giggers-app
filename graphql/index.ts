@@ -70,7 +70,7 @@ export const deleteProjectMutation = `
 `
 export const projectsQuery = `
   query getProjects($category: String="", $endCursor: String) {
-    projectSearch(first: 1, after: $endCursor, filter: {category: {eq: $category}}) {
+    projectSearch(first: 50, after: $endCursor, filter: {category: {eq: $category}}) {
       pageInfo {
         hasNextPage
         hasPreviousPage
@@ -99,7 +99,7 @@ export const projectsQuery = `
 
 export const allProjectsQuery = `
   query getProjects($endCursor: String) {
-    projectSearch(first: 1, after: $endCursor) {
+    projectSearch(first: 50, after: $endCursor) {
       pageInfo {
         hasNextPage
         hasPreviousPage
