@@ -18,8 +18,8 @@ type ProjectSearch = {
 }
 
 type SearchParams = {
-    category?: string | undefined,
-    endCursor?: string | undefined,
+    category?: string | "",
+    endCursor?: string | "",
 }
 
 type Props = {
