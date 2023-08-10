@@ -4,6 +4,15 @@ import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
+type SearchParams = {
+    category?: string | null,
+    endCursor?: string | null,
+}
+
+type Props = {
+    searchParams: SearchParams,
+}
+
 type ProjectSearch = {
     //coming from http://127.0.0.1:4000 or the Grafbase
     projectSearch: {
@@ -16,15 +25,6 @@ type ProjectSearch = {
         }
     }
 }
-
-type SearchParams = {
-    category?: string | "",
-    endCursor?: string | "",
-}
-
-type Props = {
-    searchParams: SearchParams,
-  }
 
   /*
 export const dynamic = "force-dynamic";

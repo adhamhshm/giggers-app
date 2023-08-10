@@ -30,7 +30,7 @@ const ProfileLayout = ({ user }: Props) => (
                 </div>
             </div>
 
-            {user?.projects?.edges?.length > 0 ? (
+            {/* {user?.projects?.edges?.length > 0 ? (
                 <Image
                     src={user?.projects?.edges[0]?.node?.image}
                     alt="project image"
@@ -46,7 +46,7 @@ const ProfileLayout = ({ user }: Props) => (
                     alt="project image"
                     className='rounded-xl'
                 />
-            )}
+            )} */}
        </section>
 
        <section className="flexStart flex-col lg:mt-28 mt-16 w-full">
