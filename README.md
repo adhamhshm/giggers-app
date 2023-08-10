@@ -1,5 +1,7 @@
 This is a Dribble clone project via an online tutorial. The application can allow you to showcase your work and get hired without hassle. The application was deployed on Vercel. 
 
+![Giggers Homepage](screenshots/giggers-homepage.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
