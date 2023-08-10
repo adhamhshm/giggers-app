@@ -5,8 +5,8 @@ import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
 type SearchParams = {
-    category?: string | null,
-    endCursor?: string | null,
+    category: string,
+    endCursor: string,
 }
 
 type Props = {
@@ -26,14 +26,15 @@ type ProjectSearch = {
     }
 }
 
-  /*
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
-*/
+
 
 const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 
+    console.log(endCursor);
+    console.log(category);
     //use fetchAllProject() from "/lib/actions.ts"
     //ProjectSearch is a type
     //it will fetch the project with the selected category if any

@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import CustomButton from "./CustomButton";
 
 type Props = {
-    startCursor: string
-    endCursor: string
     hasPreviousPage: boolean
     hasNextPage: boolean
+    startCursor: string
+    endCursor: string
 }
 
 
