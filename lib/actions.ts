@@ -97,27 +97,35 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
 export const fetchAllProjects = async (category?: string, endCursor?: string) => {
     client.setHeader("x-api-key", apiKey);
 
-    const variables = {
-        category: category,
-        endCursor: endCursor,
+    if (category === "All") {
+        const variables = {
+            endCursor: endCursor,
+        }
+        return makeGraphQLRequest(allProjectsQuery, variables);
+    }
+    else {
+        const variables = {
+            category: category,
+            endCursor: endCursor,
+        }
+        return makeGraphQLRequest(projectsQuery, variables);
     }
 
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
-    return makeGraphQLRequest(projectsQuery, variables);
 }
 
 //create an async arrow function to fetch all projects - all by default
 //it will accept category but it is optional
 //it will accept endCursor but it is optional, this endCursor is to know which page we are currently viewing
-export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
-    client.setHeader("x-api-key", apiKey);
+// export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
+//     client.setHeader("x-api-key", apiKey);
 
-    const variables = {
-        endCursor: endCursor,
-    }
+//     const variables = {
+//         endCursor: endCursor,
+//     }
 
-    return makeGraphQLRequest(allProjectsQuery, variables);
-}
+//     return makeGraphQLRequest(allProjectsQuery, variables);
+// }
 
 //create an arrow function to get the project details
 //it will accept the id of the project

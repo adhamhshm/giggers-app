@@ -2,7 +2,7 @@ import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
-import { fetchAllProjects, fetchAllProjectsWithoutCategory } from "@/lib/actions";
+import { fetchAllProjects } from "@/lib/actions";
 
 type SearchParams = {
     category?: string,
@@ -39,17 +39,17 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
         category = "All"; 
     }
 
-    const data = await fetchAllProjectsWithoutCategory(endCursor) as ProjectSearch;
+    const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
     //get the edges that contain nodes which are considered projects
-    let projectsToDisplay = data?.projectSearch?.edges || [];
+    const projectsToDisplay = data?.projectSearch?.edges || [];
     
-    if (category !== "All") {
-         //use fetchAllProject() from "/lib/actions.ts"
-        //ProjectSearch is a type
-        //it will fetch the project with the selected category if any
-        const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
-        projectsToDisplay = data?.projectSearch?.edges || [];
-    }
+    // if (category !== "All") {
+    //      //use fetchAllProject() from "/lib/actions.ts"
+    //     //ProjectSearch is a type
+    //     //it will fetch the project with the selected category if any
+    //     const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
+    //     projectsToDisplay = data?.projectSearch?.edges || [];
+    // }
 
     //check the projects if they exist
     if (projectsToDisplay.length === 0) {
@@ -64,9 +64,6 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 
     //to check the pagination via graphql
     const pagination = data?.projectSearch?.pageInfo;
-
-    console.log(endCursor);
-    console.log(category);
 
     return (
         <section className="flex-start flex-col paddings mb-16">
