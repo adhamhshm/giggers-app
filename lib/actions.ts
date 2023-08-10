@@ -102,6 +102,14 @@ export const fetchAllProjects = async (category?: string, endCursor?: string) =>
         endCursor: undefined || endCursor,
     }
 
+    if (category !== undefined) {
+        variables.category = category;
+    }
+
+    if (endCursor !== undefined) {
+        variables.endCursor = endCursor;
+    }
+
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
     return makeGraphQLRequest(projectsQuery, variables);
 }
@@ -114,6 +122,10 @@ export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
 
     const variables = {
         endCursor: undefined || endCursor,
+    }
+
+    if (endCursor !== undefined) {
+        variables.endCursor = endCursor;
     }
 
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });

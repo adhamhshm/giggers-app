@@ -42,6 +42,8 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
         category = "All"; // Change this to your preferred default value
     }
 
+    
+
     console.log(endCursor);
     console.log(category);
 
