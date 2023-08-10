@@ -1,5 +1,5 @@
 import { ProjectForm } from "@/common.types";
-import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from "@/graphql";
+import { allProjectsQuery, createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from "@/graphql";
 import { GraphQLClient } from "graphql-request";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -98,17 +98,17 @@ export const fetchAllProjects = async (category?: string, endCursor?: string) =>
     client.setHeader("x-api-key", apiKey);
 
     const variables = {
-        category: undefined || category,
-        endCursor: undefined || endCursor,
+        category: category,
+        endCursor: endCursor,
     }
 
-    if (category !== undefined) {
-        variables.category = category;
-    }
+    // if (category !== undefined) {
+    //     variables.category = category;
+    // }
 
-    if (endCursor !== undefined) {
-        variables.endCursor = endCursor;
-    }
+    // if (endCursor !== undefined) {
+    //     variables.endCursor = endCursor;
+    // }
 
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
     return makeGraphQLRequest(projectsQuery, variables);
@@ -121,15 +121,11 @@ export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
     client.setHeader("x-api-key", apiKey);
 
     const variables = {
-        endCursor: undefined || endCursor,
-    }
-
-    if (endCursor !== undefined) {
-        variables.endCursor = endCursor;
+        endCursor: endCursor,
     }
 
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
-    return makeGraphQLRequest(projectsQuery, variables);
+    return makeGraphQLRequest(allProjectsQuery, variables);
 }
 
 //create an arrow function to get the project details

@@ -33,25 +33,19 @@ export const revalidate = 0;
 
 const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 
-    //use fetchAllProject() from "/lib/actions.ts"
-    //ProjectSearch is a type
-    //it will fetch the project with the selected category if any
-
     if (!category || typeof category !== "string") {
         // You can provide a default value or handle the case in some way
         category = "All"; // Change this to your preferred default value
     }
-
-    
-
-    console.log(endCursor);
-    console.log(category);
 
     const data = await fetchAllProjectsWithoutCategory(endCursor) as ProjectSearch;
     //get the edges that contain nodes which are considered projects
     let projectsToDisplay = data?.projectSearch?.edges || [];
     
     if (category !== "All") {
+         //use fetchAllProject() from "/lib/actions.ts"
+        //ProjectSearch is a type
+        //it will fetch the project with the selected category if any
         const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
         projectsToDisplay = data?.projectSearch?.edges || [];
     }
@@ -69,6 +63,9 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 
     //to check the pagination via graphql
     const pagination = data?.projectSearch?.pageInfo;
+
+    console.log(endCursor);
+    console.log(category);
 
     return (
         <section className="flex-start flex-col paddings mb-16">
