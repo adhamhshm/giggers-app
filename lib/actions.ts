@@ -99,7 +99,7 @@ export const fetchAllProjects = async (category?: string, endCursor?: string) =>
 
     const variables = {
         category: category,
-        endCursor: endCursor,
+        endCursor: undefined || endCursor,
     }
 
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
@@ -113,7 +113,7 @@ export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
     client.setHeader("x-api-key", apiKey);
 
     const variables = {
-        endCursor: endCursor,
+        endCursor: undefined || endCursor,
     }
 
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
