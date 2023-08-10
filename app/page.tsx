@@ -18,17 +18,19 @@ type ProjectSearch = {
 }
 
 type SearchParams = {
-    category?: string,
-    endCursor?: string,
+    category?: string | undefined,
+    endCursor?: string | undefined,
 }
 
 type Props = {
     searchParams: SearchParams,
   }
 
+  /*
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
+*/
 
 const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 

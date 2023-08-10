@@ -8,7 +8,7 @@ import { categoryFilters } from "@/constants";
 import CustomMenu from "./CustomMenu";
 import CustomButton from "./CustomButton";
 import { createNewProject, fetchToken, updateProject } from "@/lib/actions";
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 type Props = {
     type: string,
@@ -58,7 +58,6 @@ const ProjectForm = ({ type, session, project } : Props) => {
                 //alert("Created new project!");
                 router.push("/");
             }
-            //if the form submitted with the edit purposes
             if (type === "edit") {
                 //update project
                 await updateProject(form, project?.id as string, token)
