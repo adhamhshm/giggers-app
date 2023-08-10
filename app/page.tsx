@@ -26,16 +26,17 @@ type ProjectSearch = {
     }
 }
 
+//help in pagination
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
 
-
+//https://stackoverflow.com/questions/76717384/why-am-i-recieving-a-graphql-client-error-when-deploying-to-vercel
 const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 
     if (!category || typeof category !== "string") {
-        // You can provide a default value or handle the case in some way
-        category = "All"; // Change this to your preferred default value
+        // provide if there's no category selected at start
+        category = "All"; 
     }
 
     const data = await fetchAllProjectsWithoutCategory(endCursor) as ProjectSearch;

@@ -91,7 +91,7 @@ export const createNewProject = async (form: ProjectForm, creatorId: string, tok
       }
 }
 
-//create an async arrow function to fetch all projects
+//create an async arrow function to fetch all projects -> with category
 //it will accept category but it is optional
 //it will accept endCursor but it is optional, this endCursor is to know which page we are currently viewing
 export const fetchAllProjects = async (category?: string, endCursor?: string) => {
@@ -102,19 +102,11 @@ export const fetchAllProjects = async (category?: string, endCursor?: string) =>
         endCursor: endCursor,
     }
 
-    // if (category !== undefined) {
-    //     variables.category = category;
-    // }
-
-    // if (endCursor !== undefined) {
-    //     variables.endCursor = endCursor;
-    // }
-
     //return makeGraphQLRequest(projectsQuery, { category, endCursor });
     return makeGraphQLRequest(projectsQuery, variables);
 }
 
-//create an async arrow function to fetch all projects
+//create an async arrow function to fetch all projects - all by default
 //it will accept category but it is optional
 //it will accept endCursor but it is optional, this endCursor is to know which page we are currently viewing
 export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
@@ -124,7 +116,6 @@ export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
         endCursor: endCursor,
     }
 
-    //return makeGraphQLRequest(projectsQuery, { category, endCursor });
     return makeGraphQLRequest(allProjectsQuery, variables);
 }
 
