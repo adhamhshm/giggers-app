@@ -106,6 +106,20 @@ export const fetchAllProjects = async (category?: string, endCursor?: string) =>
     return makeGraphQLRequest(projectsQuery, variables);
 }
 
+//create an async arrow function to fetch all projects
+//it will accept category but it is optional
+//it will accept endCursor but it is optional, this endCursor is to know which page we are currently viewing
+export const fetchAllProjectsWithoutCategory = async (endCursor?: string) => {
+    client.setHeader("x-api-key", apiKey);
+
+    const variables = {
+        endCursor: endCursor,
+    }
+
+    //return makeGraphQLRequest(projectsQuery, { category, endCursor });
+    return makeGraphQLRequest(projectsQuery, variables);
+}
+
 //create an arrow function to get the project details
 //it will accept the id of the project
 export const getProjectDetails = (id: string) => {

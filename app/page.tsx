@@ -2,7 +2,7 @@ import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
-import { fetchAllProjects } from "@/lib/actions";
+import { fetchAllProjects, fetchAllProjectsWithoutCategory } from "@/lib/actions";
 
 type SearchParams = {
     category?: string,
@@ -33,16 +33,26 @@ export const revalidate = 0;
 
 const Home = async ({ searchParams: { category, endCursor }}: Props) => {
 
-    console.log(endCursor);
-    console.log(category);
     //use fetchAllProject() from "/lib/actions.ts"
     //ProjectSearch is a type
     //it will fetch the project with the selected category if any
 
-    const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
+    if (!category || typeof category !== "string") {
+        // You can provide a default value or handle the case in some way
+        category = "All"; // Change this to your preferred default value
+    }
 
+    console.log(endCursor);
+    console.log(category);
+
+    const data = await fetchAllProjectsWithoutCategory(endCursor) as ProjectSearch;
     //get the edges that contain nodes which are considered projects
-    const projectsToDisplay = data?.projectSearch?.edges || [];
+    let projectsToDisplay = data?.projectSearch?.edges || [];
+    
+    if (category !== "All") {
+        const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
+        projectsToDisplay = data?.projectSearch?.edges || [];
+    }
 
     //check the projects if they exist
     if (projectsToDisplay.length === 0) {
