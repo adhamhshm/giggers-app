@@ -5,8 +5,8 @@ import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
 type SearchParams = {
-    category?: string,
-    endCursor?: string,
+    category: string,
+    endCursor: string,
 }
 
 type Props = {
@@ -38,14 +38,6 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
     //use fetchAllProject() from "/lib/actions.ts"
     //ProjectSearch is a type
     //it will fetch the project with the selected category if any
-
-    if (category === undefined) {
-        category = "undefined";
-    }
-
-    if (endCursor === undefined) {
-        endCursor = "undefined";
-    }
 
     const data = await fetchAllProjects(category, endCursor) as ProjectSearch;
 
