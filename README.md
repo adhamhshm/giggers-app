@@ -16,13 +16,15 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You will need to use [Grafbase](https://grafbase.com/) fo this application. In this project the Grafbase setup as below:
+You will need to use [Grafbase](https://grafbase.com/) for this application. In this project, the Grafbase setup as below:
 
 ```bash
 # to install Grafbase to project
 npm install @grafbase/sdk --save-dev
+
 # to initialize setup
 npx grafbase init --config-format typescript
+
 # to start dev environment via http://127.0.0.1:4000
 npx grafbase@0.24 dev
 ```
