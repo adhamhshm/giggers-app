@@ -1,6 +1,7 @@
 import { ProjectInterface } from "@/common.types";
 import Categories from "@/components/Categories";
 import LoadMore from "@/components/LoadMore";
+import Loader from "@/components/Loader";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 
@@ -58,6 +59,7 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
                 <Categories />
     
                 <p className="no-result-text text-center">No projects found at the moment.</p>
+                <Loader />
             </section>
         )
     }
@@ -71,7 +73,24 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
             
             <section className="projects-grid">
                 {/* loop through the nodes */}
-                {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
+                {projectsToDisplay.length ? 
+                    (projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
+                        //in the ProjectCard component, define the Props type for the ProjectCard
+                        <ProjectCard
+                            key={`${node?.id}`}
+                            id={node?.id}
+                            image={node?.image}
+                            title={node?.title}
+                            name={node?.createdBy?.name}
+                            avatarUrl={node?.createdBy?.avatarUrl}
+                            userId={node?.createdBy?.id}
+                        />
+                        ))
+                    ) : (
+                        <Loader />
+                    )
+                }
+                {/* {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
                 //in the ProjectCard component, define the Props type for the ProjectCard
                 <ProjectCard
                     key={`${node?.id}`}
@@ -82,7 +101,7 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
                     avatarUrl={node?.createdBy?.avatarUrl}
                     userId={node?.createdBy?.id}
                 />
-                ))}
+                ))} */}
             </section>
 
             {/* link to the starting position for graphql */}
