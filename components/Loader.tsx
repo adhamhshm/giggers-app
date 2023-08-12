@@ -1,20 +1,27 @@
 "use client";
 
-import { useState} from "react";
+import { useRef, useState} from "react";
 import { ThreeDots  } from "react-loader-spinner";
+
+// type Props = {
+//     isVisible: boolean,
+// }
 
 const Loader = () => {
 
     const [ isVisible, setIsVisible ] = useState<boolean>(true);
+    const overlay = useRef<HTMLDivElement>(null);
 
     setTimeout(() => {
         setIsVisible(false);
     }, 3000);
 
     return (
-        <div className="flex justify-center items-center w-full z-10">
+        <div>
             {isVisible ? (
-                <ThreeDots color="gray" />
+                <div ref={overlay} className="modal_loader">
+                    <ThreeDots color="gray" />
+                </div>
             ) : (
                 <></>
             )}

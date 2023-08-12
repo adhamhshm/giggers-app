@@ -69,29 +69,22 @@ const Home = async ({ searchParams: { category, endCursor }}: Props) => {
     return (
         <section className="flex-start flex-col paddings mb-16">
             <Categories />
-
-            <Loader />
-
-            {projectsToDisplay.length ? (
-                <section className="projects-grid">
-                    {/* loop through the nodes */}
-                    {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
-                        //in the ProjectCard component, define the Props type for the ProjectCard
-                        <ProjectCard
-                            key={`${node?.id}`}
-                            id={node?.id}
-                            image={node?.image}
-                            title={node?.title}
-                            name={node?.createdBy?.name}
-                            avatarUrl={node?.createdBy?.avatarUrl}
-                            userId={node?.createdBy?.id}
-                        />
-                    ))}
-                </section> 
-            ) : (
-                <Loader />
-            )}
-           
+            
+            <section className="projects-grid">
+                {/* loop through the nodes */}
+                {projectsToDisplay.map(({ node }: { node: ProjectInterface }) => (
+                //in the ProjectCard component, define the Props type for the ProjectCard
+                <ProjectCard
+                    key={`${node?.id}`}
+                    id={node?.id}
+                    image={node?.image}
+                    title={node?.title}
+                    name={node?.createdBy?.name}
+                    avatarUrl={node?.createdBy?.avatarUrl}
+                    userId={node?.createdBy?.id}
+                />
+                ))}
+            </section>
 
             {/* link to the starting position for graphql */}
             <LoadMore 
