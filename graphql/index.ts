@@ -38,7 +38,7 @@ export const createProjectMutation = `
 				description
 				createdBy {
 					email
-                    name
+            name
 				}
 			}
 		}
