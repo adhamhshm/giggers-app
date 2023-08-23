@@ -1,4 +1,6 @@
-This is a Dribble clone project via an online tutorial. The application can allow you to showcase your work and get hired without hassle. The application was deployed on Vercel. 
+This is a Dribble clone project via an online tutorial. The application can allow you to showcase your work and get hired without hassle. 
+
+The application is built upon TypeScript, Next.js, Grafbase and Tailwind CSS. The application was deployed on Vercel. 
 
 ![Giggers Homepage](screenshots/giggers-homepage.png)
 
