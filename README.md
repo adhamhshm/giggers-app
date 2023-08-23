@@ -1,4 +1,4 @@
-This is a Dribble clone project via an online tutorial. The application can allow you to showcase your work and get hired without hassle. 
+This is a Dribble clone project via an online tutorial. 
 
 The application is built upon TypeScript, Next.js, Cloudinary, Grafbase and Tailwind CSS. The application was deployed on Vercel. 
 
